@@ -82,9 +82,33 @@ include('functions.php');
                 </ul>
             </nav>
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="signin.php" class="btn amado-btn mb-15">Compte</a>
+            <div class="dropdown amado-btn-group mt-30 mb-100">
+                <button class="btn amado-btn mb-15 " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Compte
+                </button>
+                <?php
+                     if (isset($_SESSION['logged']) && $_SESSION['logged'] == true):
+                ?>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="index.php"><i class="fa fa-user"></i>  
+                <?php
+                    echo $_SESSION['nom'];
+                ?>
+                    </a>
+                    <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i>  Deconexion</a>
+                </div>
+                <?php
+                    else:
+                ?>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="signin.php"><i class="fa fa-sign-in"></i>  connexion</a>
+                    <a class="dropdown-item" href="signup.php"><i class="fa fa-user-plus"></i>  inscription</a>
+                </div>
+                <?php
+                    endif;
+                ?>
             </div>
+
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
                 <a href="cart.php" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
