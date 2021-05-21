@@ -1,3 +1,6 @@
+<?php
+include('includes/functions.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,16 +27,36 @@
                 <a href="index.php"><img src="img/core-img/logo.png" alt="logo" class="logo"></a>
               </div>
               <p class="login-card-description">Sign into your account</p>
-              <form action="#!">
+
+                <?php
+                                if (isset($_POST['send'])){
+                                    $email = escape_string($_POST['email']);
+                                    $password = escape_string(sha1($_POST['password']));
+                                    $sql = " SELECT * FROM register WHERE email='$email' AND password ='$password' LIMIT 1 ";
+                                    $result = query($sql);
+                                    $user = fetch_array($result);
+                                    if ($user !== null){
+                                      $_SESSION['logged'] = true;
+                                      $_SESSION['nom'] = $user['username'] ;
+                                      $_SESSION['user_id'] = $user['id'] ;
+                                      redirect ("index.php");
+                                    }else{
+                                      echo' <div class="alert alert-danger mt-4">Email ou mot de passe est incorrect.</div>';
+                                    }
+
+                                }
+                              ?>
+
+              <form  action="signin.php" method="post">
                   <div class="form-group">
                     <label for="email" class="sr-only">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address">
+                    <input type="email" required name="email" id="email" class="form-control" placeholder="Email address">
                   </div>
                   <div class="form-group mb-4">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="***********">
+                    <input type="password" required name="password" id="password" class="form-control" placeholder="***********">
                   </div>
-                  <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+                  <input name="send" id="login" class="btn btn-block login-btn" type="submit" value="Login">
                 </form>
                 <a href="#!" class="forgot-password-link">Forgot password?</a>
                 <p class="login-card-footer-text">Don't have an account? <a href="signup.php" class="text-reset">Register here</a></p>

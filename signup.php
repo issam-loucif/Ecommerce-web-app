@@ -1,5 +1,5 @@
 <?php
-include('functions.php');
+include('includes/functions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,19 +28,39 @@ include('functions.php');
               </div>
               <p class="login-card-description">Sign up </p>
               <?php
-              if(isset($_POST['submit']))
-              {
+              if(isset($_POST['send'])){
+                $username = $_POST['username'];
+                $email =  $_POST['email'];
+                $password = sha1($_POST['password']);
+                $cpassword = sha1($_POST['confirmpassword']);
 
+                if($password === $cpassword)
+                {
+                    $sql = "INSERT INTO register (username,email,password) VALUES ('$username','$email','$password')";
+                    $result = query($sql);
+
+                    if($result)
+                    {
+                        //echo "Saved";
+                        header('Location: index.php');
+                    }
+                    else
+                    {
+                        echo' <div class="alert alert-success mt-4">cette adresse email existe déjà veuillez réessayer.</div>';
+                      
+                    }
+                }
+                else
+                {
+                  echo ' <div class="alert alert-success mt-4">Le mot de passe et la confirmation du mot de passe ne ce correspondent pas.</div>';
+                
+                }
               }
               ?>
               <form action="signup.php" method="post">
               <div class="form-group">
-                    <label for="name" class="sr-only">Name</label>
-                    <input type="name" name="name" id="name" class="form-control" placeholder=" Your Name">
-                  </div>
-                  <div class="form-group">
-                    <label for="laste-name" class="sr-only">Laste Name</label>
-                    <input type="laste-name" name="laste-name" id="laste-name" class="form-control" placeholder=" Your laste Name">
+                    <label for="username" class="sr-only">Nom</label>
+                    <input type="text" name="username" id="name" class="form-control" placeholder="nom">
                   </div>
                   <div class="form-group">
                     <label for="email" class="sr-only">Email</label>
@@ -51,10 +71,10 @@ include('functions.php');
                     <input type="password" name="password" id="password" class="form-control" placeholder="***********">
                   </div>
                   <div class="form-group mb-4">
-                    <label for="conpassword" class="sr-only">confirme Password</label>
-                    <input type="password" name="conpassword" id="conpassword" class="form-control" placeholder="***********">
+                    <label for="confirmpassword" class="sr-only">Password</label>
+                    <input type="password" name="confirmpassword" id="confirmpassword" class="form-control" placeholder="***********">
                   </div>
-                  <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+                  <input name="send" id="login" class="btn btn-block login-btn" type="submit" value="Sign Up">
                   <a href="signin.php" id="login" class="btn btn-block login-btn" >Sign In</a>
                 </form>
                 <a href="#!" class="forgot-password-link">Forgot password?</a>

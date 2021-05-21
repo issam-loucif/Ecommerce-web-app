@@ -6,8 +6,8 @@ include('includes/header.php');
             <div class="amado-pro-catagory clearfix">
 
    <?php
-       $query = "SELECT * FROM products";
-       $result = query($query);
+       $sql = "SELECT * FROM products";
+       $result = query($sql);
     while ($row = fetch_array($result)) : 
     ?>
                 <!-- Single Catagory -->
