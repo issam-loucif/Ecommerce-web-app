@@ -9,8 +9,8 @@ include('includes/header.php');
                 <!-- Widget Title -->
                 <h6 class="widget-title mb-30">Catagories</h6>
         <?php
-            $query = "SELECT * FROM categories";
-            $result = query($query);
+            $sql = "SELECT * FROM categories";
+            $result = query($sql);
             while ($row = fetch_array($result)) : 
         ?>
                 <!--  Catagories  -->
@@ -138,10 +138,11 @@ include('includes/header.php');
                 <div class="row"> 
                 <!-- Single Product Area -->
                 <?php
-                    $search = escape_string($_POST['search']);
-                    $sql = "SELECT * FROM products WHERE name LIKE '%$search%' OR description LIKE '%$search%' ";
+                    $search = isset($_POST['search']) ?  escape_string($_POST['search']) : "";
+                    $sql = 'SELECT * FROM products WHERE name LIKE "%'.$search.'%" OR description LIKE "%'.$search.'%"';
                     $result = query($sql);
-                    while ($row = fetch_array($result)) : 
+                    if($count = mysqli_num_rows($result) > 0):
+                    while($row =  fetch_array($result)):
                 ?>
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                         <div class="single-product-wrapper">
@@ -174,7 +175,14 @@ include('includes/header.php');
                             </div>
                         </div>
                     </div>
-                    <?php endwhile; ?>
+                    <?php
+                        endwhile;
+                        else:
+                    ?>
+                    <div class="alert alert-info mt-4 mx-auto">Aucun produit trouvé</div>
+                    <?php
+                        endif;
+                    ?>
                 </div>
                 <div class="row">
                     <div class="col-12">
