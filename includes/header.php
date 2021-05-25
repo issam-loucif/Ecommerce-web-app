@@ -76,7 +76,7 @@ include('functions.php');
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="index.php">Home</a></li>
+                    <li ><a href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
                     <li><a href="cart.php">Cart</a></li>
                     <li><a href="checkout.php">Checkout</a></li>
