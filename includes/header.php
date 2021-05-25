@@ -11,6 +11,7 @@ include('functions.php');
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://www.paypal.com/sdk/js?client-id=AXJochlpYNXyVYrbdI8hF4FFrRYvSbw0dvsWxsdoEPO3Gq3nPYJ6o-zAkRW7ddz6EaD4jw6sWx_K6_RR"></script>
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
@@ -111,7 +112,7 @@ include('functions.php');
 
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.php" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="cart.php" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span> <?php echo !empty($_SESSION['count']) ? $_SESSION['count'] : ""  ?> </span></a>
                 <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
             </div>

@@ -167,7 +167,7 @@ include('includes/header.php');
                                 <!-- Ratings & Cart -->
                                 <div class="ratings-cart text-right">
                                     <div class="cart">
-                                        <a href="cart.php" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                        <a href="product-details.php?id=<?php echo $row['id'];?>" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
                                     </div>
                                 </div>
                             </div>
